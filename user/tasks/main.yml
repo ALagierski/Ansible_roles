@@ -1,0 +1,18 @@
+---
+- name: Create panda group
+  ansible.builtin.group:
+    name: panda
+    state: present
+
+- name: Create panda user and add to groups
+  ansible.builtin.user:
+    name: panda
+    shell: /bin/bash
+    groups: panda, sudo
+
+- name: Set authorized key for user panda
+  ansible.posix.authorized_key:
+    user: panda
+    state: present
+    key: "{{ lookup('file', '/home/vagrant/.ssh/authorized_keys') }}"
+# tasks file for user

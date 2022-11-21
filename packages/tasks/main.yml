@@ -1,0 +1,8 @@
+---
+- name: Install packages
+  package:
+    name:
+      - net-tools
+      - unzip
+    state: present
+# tasks file for my_role
