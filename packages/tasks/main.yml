@@ -4,5 +4,6 @@
     name:
       - net-tools
       - unzip
+      - bash-completion
     state: present
 # tasks file for my_role
