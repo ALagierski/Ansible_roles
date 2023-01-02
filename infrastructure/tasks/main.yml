@@ -1,0 +1,17 @@
+- name: Install docker & docker-compose from PyPi
+  ansible.builtin.pip:
+    name:
+      - docker
+      - docker-compose
+
+- name: Git checkout
+  ansible.builtin.git:
+    repo: "{{ git_repository }}"
+    dest: "{{ deployment_path }}"
+    version: "{{ git_branch }}"
+
+- name: Run `docker-compose up`
+  community.docker.docker_compose:
+    project_src: "{{ deployment_path }}"
+    build: true
+    debug: true
