@@ -10,11 +10,21 @@
     dest: "{{ deployment_path }}"
     version: "{{ git_branch }}"
 
+- name: Gather PUB Key
+  ansible.builtin.command: cat /home/panda/.ssh/id_rsa.pub
+  changed_when: false
+  register: pubkey
+
+- name: Gather PRIVATE Key
+  ansible.builtin.command: cat /home/panda/.ssh/id_rsa
+  changed_when: false
+  register: privkey
+
 - name: Run `docker-compose up`
   community.docker.docker_compose:
     project_src: "{{ deployment_path }}"
     build: true
     debug: true
   environment:
-    SSH_PUBLIC_KEY: "{{ lookup('file', '/home/panda/.ssh/id_rsa.pub') }}"
-    SSH_PRIVATE_KEY: "{{ lookup('file', '/home/panda/.ssh/id_rsa') }}"
+    SSH_PUBLIC_KEY: "{{ pubkey.stdout }}"
+    SSH_PRIVATE_KEY: "{{ privkey.stdout }}"
