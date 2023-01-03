@@ -16,5 +16,5 @@
     build: true
     debug: true
   environment:
-    SSH_PUBLIC_KEY: "{{ lookup('ansible.builtin.file', '/home/panda/.ssh/id_rsa.pub') }}"
-    SSH_PRIVATE_KEY: "{{ lookup('ansible.builtin.file', '/home/panda/.ssh/id_rsa') }}"
+    SSH_PUBLIC_KEY: "{{ lookup('file', '/home/panda/.ssh/id_rsa.pub') }}"
+    SSH_PRIVATE_KEY: "{{ lookup('file', '/home/panda/.ssh/id_rsa') }}"
