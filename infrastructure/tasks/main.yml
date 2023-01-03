@@ -15,3 +15,6 @@
     project_src: "{{ deployment_path }}"
     build: true
     debug: true
+  environment:
+    SSH_PUBLIC_KEY: "{{ lookup('ansible.builtin.file', '/root/.ssh/id_rsa.pub') }}"
+    SSH_PRIVATE_KEY: "{{ lookup('ansible.builtin.file', '/root/.ssh/id_rsa') }}"
